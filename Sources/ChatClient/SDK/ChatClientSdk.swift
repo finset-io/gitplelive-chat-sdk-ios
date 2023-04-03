@@ -8,7 +8,7 @@
 import Foundation
 import MQTTNIO
 
-class ChatClientSdk {
+class ChatClientSdk: NSObject {
     
     private let VERSION = "v1.0.0"
     private let OS = "ios"
@@ -120,9 +120,8 @@ class ChatClientSdk {
         print("[debug] sessionToken:", jwt.decode(jwtToken: token))
         
         userSdk.refreshToken() { data, error in
-            if let data = data {
-                self.tokenInfo = TokenInfo.from(json: data)
-                self.setHeader(token: self.tokenInfo.token)
+            if let data = data, let tokenInfo = TokenInfo.from(json: data) {
+                self.setToken(tokenInfo: tokenInfo)
                 self.connect()
             }
             else if let error = error, let responseError = ResponseError.from(json: error) {
@@ -277,13 +276,31 @@ class ChatClientSdk {
     private func getToken() {
         userSdk.generateTokenBySession(clientId: mqttClient!.configuration.clientId) { response, error in
             if let response = response, let tokenInfo = TokenInfo.from(json: response) {
-                self.tokenInfo = tokenInfo
-                self.setHeader(token: self.tokenInfo.token)
-                
+                self.setToken(tokenInfo: tokenInfo)
                 self.onConnect()
             }
             else {
                 print(error ?? "N/A")
+            }
+        }
+    }
+    
+    private func setToken(tokenInfo: TokenInfo) {
+        self.tokenInfo = tokenInfo
+        setHeader(token: tokenInfo.token)
+        Timer.scheduledTimer(withTimeInterval: 2 * 60 * 60, repeats: false) { timer in self.refreshToken() }
+    }
+    
+    private func refreshToken() {
+        userSdk.refreshToken() { data, error in
+            if let data = data, let tokenInfo = TokenInfo.from(json: data) {
+                self.setToken(tokenInfo: tokenInfo)
+            }
+            else if let error = error, let responseError = ResponseError.from(json: error) {
+                self.connectionEvent?.onError(errorType: responseError.code)
+            }
+            else {
+                self.connectionEvent?.onError(errorType: ErrorType.UNKNOWN_ERROR)
             }
         }
     }
