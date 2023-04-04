@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ErrorType {
+public class ErrorType {
 
     static let INVALID_PARAMETERS = 60101
     static let INVALID_TOKEN = 60102

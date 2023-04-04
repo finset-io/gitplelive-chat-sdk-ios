@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BaseUser: Codable {
+public class BaseUser: Codable {
     
     var user_id = ""
     var name = ""

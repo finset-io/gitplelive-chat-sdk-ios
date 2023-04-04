@@ -9,12 +9,12 @@ import Foundation
 
 public class GroupChannelMessageApi {
     
-    private var sdk = GroupChannelMessageSdk()
+    public var sdk = GroupChannelMessageSdk()
     
     //-----------------------------------------------------------------------
     // 그룹 채널 메시지 목록: 1-1. getMessageList
     //-----------------------------------------------------------------------
-    func getMessageList(channelId: String, completion: (([BaseMessage]?, Int) -> ())? = nil) {
+    public func getMessageList(channelId: String, completion: (([BaseMessage]?, Int) -> ())? = nil) {
         if ChatClient.shared.isNotConnected { return }
 
         sdk.get(channelId: channelId, messageId: 0, mode: nil, type: nil, limit: 0, content: nil) { data, error in
@@ -48,7 +48,7 @@ public class GroupChannelMessageApi {
     //-----------------------------------------------------------------------
     // 그룹 채널 메시지 목록: 1-2. getMessageList (filtered)
     //-----------------------------------------------------------------------
-    func getMessageList(channelId: String,
+    public func getMessageList(channelId: String,
                         limit: Int,
                         mode: String,
                         type: String? = nil,
@@ -88,7 +88,7 @@ public class GroupChannelMessageApi {
     //-----------------------------------------------------------------------
     // 그룹 채널 메시지 생성: 2-1. sendMessage (텍스트)
     //-----------------------------------------------------------------------
-    func sendMessage(channelId: String, text: String, meta: [String:String]? = nil, completion: ((BaseMessage?, Int) -> ())? = nil) {
+    public func sendMessage(channelId: String, text: String, meta: [String:String]? = nil, completion: ((BaseMessage?, Int) -> ())? = nil) {
         if ChatClient.shared.isNotConnected { return }
 
         sdk.create(channelId: channelId, type: "text", content: text, meta: meta) { data, error in
@@ -116,7 +116,7 @@ public class GroupChannelMessageApi {
     //-----------------------------------------------------------------------
     // 그룹 채널 메시지 생성: 2-2. sendMessage (파일)
     //-----------------------------------------------------------------------
-    func sendMessage(channelId: String, file: String, meta: [String:String]? = nil, completion: ((BaseMessage?, Int) -> ())? = nil) {
+    public func sendMessage(channelId: String, file: String, meta: [String:String]? = nil, completion: ((BaseMessage?, Int) -> ())? = nil) {
         if ChatClient.shared.isNotConnected { return }
 
         let url = sdk.url_group_channels + channelId + "/messages"
@@ -149,7 +149,7 @@ public class GroupChannelMessageApi {
     //-----------------------------------------------------------------------
     // 그룹 채널 메시지 삭제: 3. deleteMessage
     //-----------------------------------------------------------------------
-    func deleteMessage(channelId: String, messageId: Int64, completion: ((Bool, Int) -> ())? = nil) {
+    public func deleteMessage(channelId: String, messageId: Int64, completion: ((Bool, Int) -> ())? = nil) {
         if ChatClient.shared.isNotConnected { return }
 
         sdk.delete(channelId: channelId, messageId: messageId) { data, error in
@@ -173,7 +173,7 @@ public class GroupChannelMessageApi {
     //-----------------------------------------------------------------------
     // 그룹 채널 메시지 메타 데이터 수정: 4. updateMessageMeta
     //-----------------------------------------------------------------------
-    func updateMessageMeta(channelId: String, messageId: Int64, meta: [String:String], completion: ((BaseMessage?, Int) -> ())? = nil) {
+    public func updateMessageMeta(channelId: String, messageId: Int64, meta: [String:String], completion: ((BaseMessage?, Int) -> ())? = nil) {
         if ChatClient.shared.isNotConnected { return }
 
         sdk.updateMeta(channelId: channelId, messageId: messageId, meta: meta) { data, error in
@@ -201,7 +201,7 @@ public class GroupChannelMessageApi {
     //-----------------------------------------------------------------------
     // 그룹 채널 메시지 메타 데이터 삭제: 5. deleteMessageMeta
     //-----------------------------------------------------------------------
-    func deleteMessageMeta(channelId: String, messageId: Int64, keys: [String], completion: ((BaseMessage?, Int) -> ())? = nil) {
+    public func deleteMessageMeta(channelId: String, messageId: Int64, keys: [String], completion: ((BaseMessage?, Int) -> ())? = nil) {
         if ChatClient.shared.isNotConnected { return }
 
         sdk.deleteMeta(channelId: channelId, messageId: messageId, keys: keys) { data, error in

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BaseMessage: Codable {
+public class BaseMessage: Codable {
     
     class Filter: Codable {
         var origin_content: String?

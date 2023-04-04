@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MessagePage: Codable {
+public class MessagePage: Codable {
 
     var messages = [BaseMessage]()
     

@@ -77,7 +77,7 @@ public class ChatClientSdk: NSObject {
     //-----------------------------------------------------------------------
     // API: 1-1. 초기화
     //-----------------------------------------------------------------------
-    init(host: String, appId: String) {
+    public init(host: String, appId: String) {
         self.host = host
         self.appId = appId
     }
@@ -85,7 +85,7 @@ public class ChatClientSdk: NSObject {
     //-----------------------------------------------------------------------
     // API: 1-2. 초기화
     //-----------------------------------------------------------------------
-    func reset(host: String, appId: String) {
+    public func reset(host: String, appId: String) {
         self.host = host
         self.appId = appId
         self.pushToken = nil
@@ -94,14 +94,14 @@ public class ChatClientSdk: NSObject {
     //-----------------------------------------------------------------------
     // API: 2-3. 초기화
     //-----------------------------------------------------------------------
-    func setPushToken(pushToken: String) {
+    public func setPushToken(pushToken: String) {
         Util.save("new_push_token", pushToken)
     }
     
     //-----------------------------------------------------------------------
     // API: 2-1. 서버접속
     //-----------------------------------------------------------------------
-    func connectUser(userId: String, token: String) {
+    public func connectUser(userId: String, token: String) {
         if (!Util.isNetwork) {
             connectionEvent?.onError(errorType: ErrorType.UNABLE_CONNECT_ERROR)
             return
@@ -136,7 +136,7 @@ public class ChatClientSdk: NSObject {
     //-----------------------------------------------------------------------
     // API: 2-2. 서버접속
     //-----------------------------------------------------------------------
-    func connectUser(userId: String) {
+    public func connectUser(userId: String) {
         if (!Util.isNetwork) {
             connectionEvent?.onError(errorType: ErrorType.UNABLE_CONNECT_ERROR)
             return
@@ -152,7 +152,7 @@ public class ChatClientSdk: NSObject {
     //-----------------------------------------------------------------------
     // API: 3. 접속해제
     //-----------------------------------------------------------------------
-    func disconnectUser() {
+    public func disconnectUser() {
         if let mqttClient = mqttClient {
             mqttClient.disconnect()
         }

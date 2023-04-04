@@ -18,14 +18,14 @@ public class UserApi {
         }
     }
     
-    var sdk = UserSdk()
-    var myInfo: BaseUser?
-        
-    func isMemberOf(users: [BaseUser]) -> Bool {
+    public var sdk = UserSdk()
+    public var myInfo: BaseUser?
+    
+    public func isMemberOf(users: [BaseUser]) -> Bool {
         return users.contains(where: {$0.user_id == myInfo?.user_id})
     }
     
-    func isMe(user: BaseUser?) -> Bool {
+    public func isMe(user: BaseUser?) -> Bool {
         guard let user = user else { return false }
         return user.user_id == myInfo?.user_id
     }
@@ -33,7 +33,7 @@ public class UserApi {
     //-----------------------------------------------------------------------
     // 사용자 조회: 1. me
     //-----------------------------------------------------------------------
-    func me(completion: ((BaseUser?, Int) -> ())? = nil) {
+    public func me(completion: ((BaseUser?, Int) -> ())? = nil) {
         if ChatClient.shared.isNotConnected { return }
         
         sdk.find() { data, error in
@@ -62,7 +62,7 @@ public class UserApi {
     //-----------------------------------------------------------------------
     // 사용자 수정: 2. updateUser
     //-----------------------------------------------------------------------
-    func updateUser(name: String, profile: String, completion: ((BaseUser?, Int) -> ())? = nil) {
+    public func updateUser(name: String, profile: String, completion: ((BaseUser?, Int) -> ())? = nil) {
         if ChatClient.shared.isNotConnected { return }
 
         sdk.update(name: name, profile: profile) { data, error in
@@ -91,7 +91,7 @@ public class UserApi {
     //-----------------------------------------------------------------------
     // 사용자 메타 데이터 수정: 3. updateMeta
     //-----------------------------------------------------------------------
-    func updateMeta(meta: [String:String], completion: ((BaseUser?, Int) -> ())? = nil) {
+    public func updateMeta(meta: [String:String], completion: ((BaseUser?, Int) -> ())? = nil) {
         if ChatClient.shared.isNotConnected { return }
 
         sdk.updateMeta(meta: meta) { data, error in
@@ -120,7 +120,7 @@ public class UserApi {
     //-----------------------------------------------------------------------
     // 사용자 메타 데이터 삭제: 4. deleteMeta
     //-----------------------------------------------------------------------
-    func deleteMeta(keys: [String], completion: ((BaseUser?, Int) -> ())? = nil) {
+    public func deleteMeta(keys: [String], completion: ((BaseUser?, Int) -> ())? = nil) {
         if ChatClient.shared.isNotConnected { return }
 
         sdk.deleteMeta(keys: keys) { data, error in

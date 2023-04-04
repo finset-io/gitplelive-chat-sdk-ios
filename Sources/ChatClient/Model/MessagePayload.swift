@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MessagePayload: Codable {
+public class MessagePayload: Codable {
     
     var category = ""
     var app_id = ""

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BanInfo: Codable {
+public class BanInfo: Codable {
     
     var user: BaseUser
     var start_at: Int64 = 0

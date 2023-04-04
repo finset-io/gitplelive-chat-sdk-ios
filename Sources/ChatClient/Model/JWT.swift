@@ -7,7 +7,7 @@
 
 import Foundation
 
-class JWT: Codable {
+public class JWT: Codable {
 
     class Header: Codable {
         var alg = ""

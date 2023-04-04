@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ResponseError: Codable {
+public class ResponseError: Codable {
     
     var status = 0
     var timestamp = ""

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TokenInfo: Codable {
+public class TokenInfo: Codable {
 
     var token: String = ""
     var expires_at: Int64 = 0

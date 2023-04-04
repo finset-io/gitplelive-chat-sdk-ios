@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GroupChannel: Codable {
+public class GroupChannel: Codable {
 
     var channel_id = ""
     var type = "group"

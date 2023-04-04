@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DeviceInfo: Codable {
+public class DeviceInfo: Codable {
     
     static var deviceId: String {
         if let id = Util.load("device_id") {

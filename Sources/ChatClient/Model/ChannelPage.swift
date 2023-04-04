@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ChannelPage: Codable {
+public class ChannelPage: Codable {
     
     var channels = [GroupChannel]()
     var next: String?
