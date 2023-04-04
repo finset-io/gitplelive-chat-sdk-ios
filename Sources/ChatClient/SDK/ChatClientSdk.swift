@@ -28,15 +28,15 @@ public class ChatClientSdk: NSObject {
     private var tokenInfo: TokenInfo!
     private var pushToken: String?
     
-    var connectionEvent: ConnectionDelegate?
-    var userEvent: UserDelegate?
-    var groupChannelEvent: GroupChannelDelegate?
+    public var connectionEvent: ConnectionDelegate?
+    public var userEvent: UserDelegate?
+    public var groupChannelEvent: GroupChannelDelegate?
         
-    var isConnected: Bool {
+    public var isConnected: Bool {
         return mqttClient != nil && connected
     }
 
-    var isNotConnected: Bool {
+    public var isNotConnected: Bool {
         if mqttClient == nil || !connected {
             connectionEvent?.onError(errorType: ErrorType.NOT_CONNECTED)
             return true
@@ -44,7 +44,7 @@ public class ChatClientSdk: NSObject {
         return false
     }
     
-    var newPushToken: String? {
+    public var newPushToken: String? {
         if let pushToken = pushToken, pushToken == Util.load("new_push_token")  {
             return nil
         }
@@ -54,7 +54,7 @@ public class ChatClientSdk: NSObject {
         }
     }
     
-    private func setHeader(appId: String? = nil, userId: String? = nil, token: String? = nil) {
+    public func setHeader(appId: String? = nil, userId: String? = nil, token: String? = nil) {
         if let appId = appId {
             headers["APP_ID"] = appId
         }
@@ -66,7 +66,7 @@ public class ChatClientSdk: NSObject {
         }
     }
 
-    func logout() {
+    public func logout() {
         guard let mqttClient = mqttClient else { return }
         
         userSdk.deleteDeviceToken(clientId: mqttClient.configuration.clientId) { data, error in
@@ -161,7 +161,7 @@ public class ChatClientSdk: NSObject {
         connected = false
     }
     
-    private func getServerUrl(host: String) -> URL? {
+    public func getServerUrl(host: String) -> URL? {
         if let url = URL(string: "wss://\(host)/ws") {
             print("[debug] ChatClientSDK serverUrl =", url)
             return url
@@ -169,14 +169,14 @@ public class ChatClientSdk: NSObject {
         return nil
     }
     
-    private func getClientId(address: String) -> String {
+    public func getClientId(address: String) -> String {
         let date = Date.currentTimeStamp
         let clientId = "\(appId!)::\(userId!)::\(VERSION)::\(date)::\(address)::\(OS)::\(DeviceInfo.deviceId)"
         print("[debug] ChatClientSDK clientId =", clientId)
         return clientId
     }
     
-    private func connect() {
+    public func connect() {
         getHealth() { reponse, error in
             if let reponse = reponse {
                 self.connect(address: reponse)
@@ -190,7 +190,7 @@ public class ChatClientSdk: NSObject {
     //-----------------------------------------------------------------------
     // 내부용: 1. 서버 상태 확인 및 Client IP 조회용
     //-----------------------------------------------------------------------
-    private func getHealth(completion: @escaping (String?, String?) -> ()) {
+    public func getHealth(completion: @escaping (String?, String?) -> ()) {
         let url = "https://" + host + "/health"
 
         NetworkHelper.getRequest(url: url, headers: nil) { data, error in
@@ -206,7 +206,7 @@ public class ChatClientSdk: NSObject {
         }
     }
 
-    private func connect(address: String) {
+    public func connect(address: String) {
         guard let url = getServerUrl(host: host) else { return }
         let clientId = getClientId(address: address)
         mqttClient = MQTTClient(configuration: MQTTConfiguration(url: url, clientId: clientId))
@@ -273,7 +273,7 @@ public class ChatClientSdk: NSObject {
         }
     }
     
-    private func getToken() {
+    public func getToken() {
         userSdk.generateTokenBySession(clientId: mqttClient!.configuration.clientId) { response, error in
             if let response = response, let tokenInfo = TokenInfo.from(json: response) {
                 self.setToken(tokenInfo: tokenInfo)
@@ -285,13 +285,13 @@ public class ChatClientSdk: NSObject {
         }
     }
     
-    private func setToken(tokenInfo: TokenInfo) {
+    public func setToken(tokenInfo: TokenInfo) {
         self.tokenInfo = tokenInfo
         setHeader(token: tokenInfo.token)
         Timer.scheduledTimer(withTimeInterval: 2 * 60 * 60, repeats: false) { timer in self.refreshToken() }
     }
     
-    private func refreshToken() {
+    public func refreshToken() {
         userSdk.refreshToken() { data, error in
             if let data = data, let tokenInfo = TokenInfo.from(json: data) {
                 self.setToken(tokenInfo: tokenInfo)
@@ -305,7 +305,7 @@ public class ChatClientSdk: NSObject {
         }
     }
     
-    func onConnect() {
+    public func onConnect() {
         ChatClient.user.me() { user, errorType in
             if errorType > 0 {
                 print(ErrorType.message(errorType: errorType))
@@ -319,7 +319,7 @@ public class ChatClientSdk: NSObject {
         }
     }
     
-    func registerDeviceToken(pushToken: String) {
+    public func registerDeviceToken(pushToken: String) {
         userSdk.registerDeviceToken(clientId: mqttClient!.configuration.clientId, pushToken: pushToken) { data, error in
             if let error = error {
                 print("[debug] registerDeviceToken error:", error)
@@ -331,7 +331,7 @@ public class ChatClientSdk: NSObject {
         }
     }
 
-    func findAllJoined() {
+    public func findAllJoined() {
         ChatClient.shared.groupChannelSdk.findAllJoined() { data, error in
             if let data = data {
                 if let page = ChannelPage.from(json: data) {
@@ -345,7 +345,7 @@ public class ChatClientSdk: NSObject {
         }
     }
     
-    func subscribe(channels: [GroupChannel]) {
+    public func subscribe(channels: [GroupChannel]) {
         var topics = [String]()
         
         // 사용자 이벤트 수신용 토픽
@@ -372,7 +372,7 @@ public class ChatClientSdk: NSObject {
         connectionEvent?.onConnected(status: "success")
     }
     
-    func subscribe(_ channel: GroupChannel, _ user: String) {
+    public func subscribe(_ channel: GroupChannel, _ user: String) {
         let topic = "\(topicPrefix)/\(appId!)/channel/\(channel.type)/\(channel.channel_id)/\(user)/#"
         
         mqttClient!.subscribe(to: topic).whenSuccess { response in
@@ -380,7 +380,7 @@ public class ChatClientSdk: NSObject {
         }
     }
     
-    func unsubscribe(_ channel: GroupChannel, _ user: String) {
+    public func unsubscribe(_ channel: GroupChannel, _ user: String) {
         let topic = "\(topicPrefix)/\(appId!)/channel/\(channel.type)/\(channel.channel_id)/\(user)/#"
         
         mqttClient!.unsubscribe(from: topic).whenSuccess { response in
@@ -388,7 +388,7 @@ public class ChatClientSdk: NSObject {
         }
     }
     
-    func parsePayload(_ payload: MessagePayload) {
+    public func parsePayload(_ payload: MessagePayload) {
         switch (payload.category) {
         case "user_update":
             userEvent?.onUpdate(user: payload.user!)

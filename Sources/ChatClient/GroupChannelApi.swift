@@ -9,7 +9,7 @@ import Foundation
 
 public class GroupChannelApi {
     
-    var delegate: GroupChannelDelegate? {
+    public var delegate: GroupChannelDelegate? {
         get {
             return ChatClient.shared.groupChannelEvent
         }

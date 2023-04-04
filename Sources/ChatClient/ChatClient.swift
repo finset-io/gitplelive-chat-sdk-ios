@@ -9,7 +9,7 @@ import Foundation
 
 public class ChatClient: ChatClientSdk {
     
-    var delegate: ConnectionDelegate? {
+    public var delegate: ConnectionDelegate? {
         get {
             return connectionEvent
         }

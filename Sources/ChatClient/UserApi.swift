@@ -9,7 +9,7 @@ import Foundation
 
 public class UserApi {
     
-    var delegate: UserDelegate? {
+    public var delegate: UserDelegate? {
         get {
             return ChatClient.shared.userEvent
         }
