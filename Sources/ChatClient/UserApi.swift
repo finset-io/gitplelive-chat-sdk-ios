@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UserApi {
+public class UserApi {
     
     var delegate: UserDelegate? {
         get {

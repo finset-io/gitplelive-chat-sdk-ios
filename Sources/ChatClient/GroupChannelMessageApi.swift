@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GroupChannelMessageApi {
+public class GroupChannelMessageApi {
     
     private var sdk = GroupChannelMessageSdk()
     

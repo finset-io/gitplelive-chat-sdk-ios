@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ChatClient: ChatClientSdk {
+public class ChatClient: ChatClientSdk {
     
     var delegate: ConnectionDelegate? {
         get {
@@ -18,13 +18,13 @@ class ChatClient: ChatClientSdk {
         }
     }
     
-    static var shared: ChatClient!
+    public static var shared: ChatClient!
     
-    static var user: UserApi = UserApi()
-    static var groupChannel = GroupChannelApi()
-    static var groupChannelMessage = GroupChannelMessageApi()
+    public static var user: UserApi = UserApi()
+    public static var groupChannel = GroupChannelApi()
+    public static var groupChannelMessage = GroupChannelMessageApi()
     
-    static func setup(host: String, appId: String) {
+    public static func setup(host: String, appId: String) {
         shared = ChatClient(host: host, appId: appId)
     }
     

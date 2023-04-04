@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GroupChannelSdk {
+public class GroupChannelSdk {
     
     var userId: String { return ChatClient.shared.userId }
     var headers: [String:String] { return ChatClient.shared.headers }

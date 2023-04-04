@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GroupChannelApi {
+public class GroupChannelApi {
     
     var delegate: GroupChannelDelegate? {
         get {

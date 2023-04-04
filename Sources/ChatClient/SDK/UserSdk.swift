@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UserSdk {
+public class UserSdk {
     
     var userId: String { return ChatClient.shared.userId }
     var headers: [String:String] { return ChatClient.shared.headers }

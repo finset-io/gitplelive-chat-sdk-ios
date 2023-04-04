@@ -8,7 +8,7 @@
 import Foundation
 import MQTTNIO
 
-class ChatClientSdk: NSObject {
+public class ChatClientSdk: NSObject {
     
     private let VERSION = "v1.0.0"
     private let OS = "ios"
