@@ -10,15 +10,15 @@ import Foundation
 public class BaseMessage: Codable {
     
     public class Filter: Codable {
-        var origin_content: String?
-        var type: [String]?
+        public var origin_content: String?
+        public var type: [String]?
     }
 
     public class FileInfo: Codable {
-        var type: String
-        var name: String
-        var url: String
-        var size: Int
+        public var type: String
+        public var name: String
+        public var url: String
+        public var size: Int
     }
 
     public var type = ""
