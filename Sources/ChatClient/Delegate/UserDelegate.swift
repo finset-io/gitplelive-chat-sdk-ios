@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol UserDelegate {
+public protocol UserDelegate {
 
     func onUpdate(user: BaseUser)
     

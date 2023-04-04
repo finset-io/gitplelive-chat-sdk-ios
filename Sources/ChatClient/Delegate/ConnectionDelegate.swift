@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ConnectionDelegate {
+public protocol ConnectionDelegate {
 
     func onError(errorType: Int)
     

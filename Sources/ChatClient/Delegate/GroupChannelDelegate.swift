@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol GroupChannelDelegate {
+public protocol GroupChannelDelegate {
 
     func onUpdated(channel: GroupChannel)
     
