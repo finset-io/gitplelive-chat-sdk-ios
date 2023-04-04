@@ -9,14 +9,14 @@ import Foundation
 
 public class JWT: Codable {
 
-    class Header: Codable {
+    public class Header: Codable {
         var alg = ""
         var typ = ""
 
         var isJWT: Bool { return typ == "JWT" }
     }
 
-    class Body: Codable {
+    public class Body: Codable {
         var user_id = ""
         var iat: Int64 = 0
         var exp: Int64 = 0
@@ -24,13 +24,13 @@ public class JWT: Codable {
         var isExpired: Bool { return exp < Date.currentTimeStamp }
     }
 
-    var jwt = ""
+    public var jwt = ""
 
-    func JWT(jwt: String) {
+    public func JWT(jwt: String) {
         self.jwt = jwt
     }
 
-    func decode(jwtToken jwt: String) -> [String: Any] {
+    public func decode(jwtToken jwt: String) -> [String: Any] {
         let segments = jwt.components(separatedBy: ".")
         if segments.count > 1 {
             return decodeJWTPart(segments[1]) ?? [:]
@@ -38,7 +38,7 @@ public class JWT: Codable {
         return [:]
     }
 
-    func base64UrlDecode(_ value: String) -> Data? {
+    public func base64UrlDecode(_ value: String) -> Data? {
         var base64 = value
             .replacingOccurrences(of: "-", with: "+")
             .replacingOccurrences(of: "_", with: "/")
@@ -53,7 +53,7 @@ public class JWT: Codable {
         return Data(base64Encoded: base64, options: .ignoreUnknownCharacters)
     }
 
-    func decodeJWTPart(_ value: String) -> [String: Any]? {
+    public func decodeJWTPart(_ value: String) -> [String: Any]? {
         guard let bodyData = base64UrlDecode(value),
             let json = try? JSONSerialization.jsonObject(with: bodyData, options: []), let payload = json as? [String: Any] else {
             return nil

@@ -9,15 +9,15 @@ import Foundation
 
 public class BaseUser: Codable {
     
-    var user_id = ""
-    var name = ""
-    var created_at: Int64 = 0
-    var updated_at: Int64?
-    var profile_url: String?
-    var meta: [String:String]?
-    var joined_at: Int64?
+    public var user_id = ""
+    public var name = ""
+    public var created_at: Int64 = 0
+    public var updated_at: Int64?
+    public var profile_url: String?
+    public var meta: [String:String]?
+    public var joined_at: Int64?
     
-    static func from(json: String) -> BaseUser? {
+    public static func from(json: String) -> BaseUser? {
         do {
             return try JSONDecoder().decode(BaseUser.self, from: Data(json.utf8))
         }
@@ -27,7 +27,7 @@ public class BaseUser: Codable {
         }
     }
     
-    var json: String {
+    public var json: String {
         do {
             let data = try JSONEncoder().encode(self)
             if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
@@ -44,7 +44,7 @@ public class BaseUser: Codable {
         }
     }
     
-    static func json(from: [BaseUser]) -> String? {
+    public static func json(from: [BaseUser]) -> String? {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         do {

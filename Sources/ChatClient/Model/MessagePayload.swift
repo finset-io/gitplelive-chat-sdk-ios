@@ -9,14 +9,14 @@ import Foundation
 
 public class MessagePayload: Codable {
     
-    var category = ""
-    var app_id = ""
-    var user: BaseUser?
-    var channel: GroupChannel?
-    var message: BaseMessage?
-    var banInfo: BanInfo?
+    public var category = ""
+    public var app_id = ""
+    public var user: BaseUser?
+    public var channel: GroupChannel?
+    public var message: BaseMessage?
+    public var banInfo: BanInfo?
     
-    static func from(json: String) -> MessagePayload? {
+    public static func from(json: String) -> MessagePayload? {
         do {
             return try JSONDecoder().decode(MessagePayload.self, from: Data(json.utf8))
         }
@@ -26,7 +26,7 @@ public class MessagePayload: Codable {
         }
     }
     
-    var json: String {
+    public var json: String {
         do {
             let data = try JSONEncoder().encode(self)
             if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),

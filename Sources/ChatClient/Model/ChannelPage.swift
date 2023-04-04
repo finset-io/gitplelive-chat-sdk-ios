@@ -9,10 +9,10 @@ import Foundation
 
 public class ChannelPage: Codable {
     
-    var channels = [GroupChannel]()
-    var next: String?
+    public var channels = [GroupChannel]()
+    public var next: String?
     
-    static func from(json: String) -> ChannelPage? {
+    public static func from(json: String) -> ChannelPage? {
         do {
             return try JSONDecoder().decode(ChannelPage.self, from: Data(json.utf8))
         }
@@ -22,7 +22,7 @@ public class ChannelPage: Codable {
         }
     }
     
-    var json: String {
+    public var json: String {
         do {
             let data = try JSONEncoder().encode(self)
             if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),

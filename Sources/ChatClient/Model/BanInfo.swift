@@ -9,12 +9,12 @@ import Foundation
 
 public class BanInfo: Codable {
     
-    var user: BaseUser
-    var start_at: Int64 = 0
-    var end_at: Int64?
-    var reason: String?
+    public var user: BaseUser
+    public var start_at: Int64 = 0
+    public var end_at: Int64?
+    public var reason: String?
     
-    static func from(json: String) -> BanInfo? {
+    public static func from(json: String) -> BanInfo? {
         do {
             return try JSONDecoder().decode(BanInfo.self, from: Data(json.utf8))
         }
@@ -24,7 +24,7 @@ public class BanInfo: Codable {
         }
     }
     
-    var json: String {
+    public var json: String {
         do {
             let data = try JSONEncoder().encode(self)
             if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
@@ -41,7 +41,7 @@ public class BanInfo: Codable {
         }
     }
     
-    static func json(from: [BanInfo]) -> String? {
+    public static func json(from: [BanInfo]) -> String? {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         do {

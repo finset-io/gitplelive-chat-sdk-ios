@@ -9,17 +9,17 @@ import Foundation
 
 public class ErrorType {
 
-    static let INVALID_PARAMETERS = 60101
-    static let INVALID_TOKEN = 60102
-    static let EXPIRED_TOKEN = 60103
-    static let INVALID_CHANNEL_ID = 60104
-    static let SERVER_NOT_RESPONDING = 60901
-    static let UNABLE_CONNECT_ERROR = 60902
-    static let UNABLE_SUBSCRIBE_ERROR = 60903
-    static let NOT_CONNECTED = 60904
-    static let UNKNOWN_ERROR = 60999
+    public static let INVALID_PARAMETERS = 60101
+    public static let INVALID_TOKEN = 60102
+    public static let EXPIRED_TOKEN = 60103
+    public static let INVALID_CHANNEL_ID = 60104
+    public static let SERVER_NOT_RESPONDING = 60901
+    public static let UNABLE_CONNECT_ERROR = 60902
+    public static let UNABLE_SUBSCRIBE_ERROR = 60903
+    public static let NOT_CONNECTED = 60904
+    public static let UNKNOWN_ERROR = 60999
     
-    static func message(errorType: Int) -> String {
+    public static func message(errorType: Int) -> String {
         if (errorType == 1001) { return "Invalid or missing parameters." }
         else if (errorType == 1002) { return "The requested resource could not be found." }
         else if (errorType == 1003) { return "The requested channel could not be found." }

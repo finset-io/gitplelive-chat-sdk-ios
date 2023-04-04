@@ -9,30 +9,30 @@ import Foundation
 
 public class BaseMessage: Codable {
     
-    class Filter: Codable {
+    public class Filter: Codable {
         var origin_content: String?
         var type: [String]?
     }
 
-    class FileInfo: Codable {
+    public class FileInfo: Codable {
         var type: String
         var name: String
         var url: String
         var size: Int
     }
 
-    var type = ""
-    var message_id: Int64 = 0
-    var channel_id = ""
-    var created_at: Int64 = 0
-    var updated_at: Int64?
-    var user: BaseUser?
-    var content: String?
-    var filter: Filter?
-    var file: FileInfo?
-    var meta: [String:String]?
+    public var type = ""
+    public var message_id: Int64 = 0
+    public var channel_id = ""
+    public var created_at: Int64 = 0
+    public var updated_at: Int64?
+    public var user: BaseUser?
+    public var content: String?
+    public var filter: Filter?
+    public var file: FileInfo?
+    public var meta: [String:String]?
 
-    static func from(json: String) -> BaseMessage? {
+    public static func from(json: String) -> BaseMessage? {
         do {
             return try JSONDecoder().decode(BaseMessage.self, from: Data(json.utf8))
         }
@@ -42,7 +42,7 @@ public class BaseMessage: Codable {
         }
     }
     
-    var json: String {
+    public var json: String {
         do {
             let data = try JSONEncoder().encode(self)
             if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
@@ -59,7 +59,7 @@ public class BaseMessage: Codable {
         }
     }
     
-    static func json(from: [BaseMessage]) -> String? {
+    public static func json(from: [BaseMessage]) -> String? {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         do {
@@ -72,7 +72,7 @@ public class BaseMessage: Codable {
         }
     }
     
-    var content2: String? {
+    public var content2: String? {
         if type == "text" {
             return text
         }
@@ -84,7 +84,7 @@ public class BaseMessage: Codable {
         }
     }
 
-    var isImage: Bool {
+    public var isImage: Bool {
         guard let file = file else { return false }
         return file.url.endsWith(".jpeg") ||
                file.url.endsWith(".jpg") ||
@@ -92,7 +92,7 @@ public class BaseMessage: Codable {
                file.url.endsWith(".gif");
     }
 
-    var text: String? {
+    public var text: String? {
         if type != "text" { return nil }
 
         if let meta = meta, let value = meta["text"] {
@@ -101,7 +101,7 @@ public class BaseMessage: Codable {
         return content
     }
 
-    var url: String? {
+    public var url: String? {
         guard let file = file else { return nil }
 
         return file.url

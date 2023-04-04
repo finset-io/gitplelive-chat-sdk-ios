@@ -9,9 +9,9 @@ import Foundation
 
 public class MessagePage: Codable {
 
-    var messages = [BaseMessage]()
+    public var messages = [BaseMessage]()
     
-    static func from(json: String) -> MessagePage? {
+    public static func from(json: String) -> MessagePage? {
         do {
             return try JSONDecoder().decode(MessagePage.self, from: Data(json.utf8))
         }

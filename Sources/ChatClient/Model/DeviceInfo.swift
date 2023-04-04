@@ -9,7 +9,7 @@ import Foundation
 
 public class DeviceInfo: Codable {
     
-    static var deviceId: String {
+    public static var deviceId: String {
         if let id = Util.load("device_id") {
             return id
         }
@@ -18,7 +18,7 @@ public class DeviceInfo: Codable {
         return id2
     }
     
-    var json: String {
+    public var json: String {
         do {
             let data = try JSONEncoder().encode(self)
             return String(data: data, encoding: .utf8) ?? ""

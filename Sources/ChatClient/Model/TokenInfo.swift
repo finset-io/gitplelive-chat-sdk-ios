@@ -12,7 +12,7 @@ public class TokenInfo: Codable {
     var token: String = ""
     var expires_at: Int64 = 0
     
-    static func from(json: String) -> TokenInfo? {
+    public static func from(json: String) -> TokenInfo? {
         do {
             return try JSONDecoder().decode(TokenInfo.self, from: Data(json.utf8))
         }
@@ -22,7 +22,7 @@ public class TokenInfo: Codable {
         }
     }
     
-    var json: String {
+    public var json: String {
         do {
             let data = try JSONEncoder().encode(self)
             return String(data: data, encoding: .utf8) ?? ""
