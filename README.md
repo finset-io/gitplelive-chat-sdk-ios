@@ -1,4 +1,4 @@
 # gitplelive-chat-sdk-ios
 GitpleLive iOS SDK
 
-## ChatClient
+## ChatClient 1.0.0
