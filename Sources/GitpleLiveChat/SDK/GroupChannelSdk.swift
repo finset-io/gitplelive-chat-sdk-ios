@@ -12,7 +12,7 @@ public class GroupChannelSdk {
     var userId: String { return ChatClient.shared.userId }
     var headers: [String:String] { return ChatClient.shared.headers }
     var url_group_channels: String { return "https://" + ChatClient.shared.host + "/v1/sdk/group/channels/" }
-        
+    
     func ban(channelId: String,
              userId: String,
              seconds: Int?,
