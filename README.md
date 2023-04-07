@@ -103,49 +103,49 @@
     public func getChannelList(completion: ((ChannelPage?, Int) -> ())? = nil)
 
 ### 전체 목록: 1-2. getChannelList (filtered)    
-    public func getChannelList(limit: Int,
-                        showMembers: Bool,
-                        showManagers: Bool,
-                        showReadReceipt: Bool,
-                        showDeliveryReceipt: Bool,
-                        showUnread: Bool,
-                        showLastMessage: Bool,
-                        name: String?,
-                        include_members: String?,
-                        next: String?,
+    public func getChannelList( limit: Int,
+                                showMembers: Bool,
+                                showManagers: Bool,
+                                showReadReceipt: Bool,
+                                showDeliveryReceipt: Bool,
+                                showUnread: Bool,
+                                showLastMessage: Bool,
+                                name: String?,
+                                include_members: String?,
+                                next: String?,
 
 ### 참가한 목록: 2. getJoinedChannelList
-    public func getJoinedChannelList(limit: Int = 15,
-                              showMembers: Bool = true,
-                              showManagers: Bool = true,
-                              showReadReceipt: Bool = true,
-                              showDeliveryReceipt: Bool = true,
-                              showUnread: Bool = true,
-                              showLastMessage: Bool = true,
-                              name: String? = nil,
-                              include_members: String? = nil,
-                              next: String? = nil,
-                              completion: ((ChannelPage?, Int) -> ())? = nil)
+    public func getJoinedChannelList( limit: Int = 15,
+                                      showMembers: Bool = true,
+                                      showManagers: Bool = true,
+                                      showReadReceipt: Bool = true,
+                                      showDeliveryReceipt: Bool = true,
+                                      showUnread: Bool = true,
+                                      showLastMessage: Bool = true,
+                                      name: String? = nil,
+                                      include_members: String? = nil,
+                                      next: String? = nil,
+                                      completion: ((ChannelPage?, Int) -> ())? = nil)
 
 ### 정보: 3. getChannel
     public func getChannel(channelId: String, completion: ((GroupChannel?, Int) -> ())? = nil)
 
 ### 생성: 4-1. createChannel
-    public func createChannel(channelId: String,
-                       name: String,
-                       profile: String? = nil,
-                       members: [String],
-                       reuse: Bool = false,
-                       meta: [String:String]? = nil,
-                       completion: ((GroupChannel?, Int) -> ())? = nil)
+    public func createChannel( channelId: String,
+                               name: String,
+                               profile: String? = nil,
+                               members: [String],
+                               reuse: Bool = false,
+                               meta: [String:String]? = nil,
+                               completion: ((GroupChannel?, Int) -> ())? = nil)
 
 ### 생성: 4-2. createChannel (아이디 자동 생성)
-    public func createChannel(name: String,
-                       profile: String? = nil,
-                       members: [String],
-                       reuse: Bool = false,
-                       meta: [String:String]? = nil,
-                       completion: ((GroupChannel?, Int) -> ())? = nil)
+    public func createChannel( name: String,
+                               profile: String? = nil,
+                               members: [String],
+                               reuse: Bool = false,
+                               meta: [String:String]? = nil,
+                               completion: ((GroupChannel?, Int) -> ())? = nil)
 
 ### 수정: 5. updateChannel
     public func updateChannel(channelId: String, name: String, profile: String, completion: ((GroupChannel?, Int) -> ())? = nil)
