@@ -14,12 +14,14 @@
 
 - 스위프트 패키지 추가: https://github.com/finset-io/gitplelive-chat-sdk-ios.git
 
+        import GitpleLiveChat
+
 
 ## ChatClient SDK
  
 - Sigleton Access Object: ChatClient.shared
 
-    ChatClient.shared.setup(host: "guest.gitplelive.io", appId: "gitple")
+        ChatClient.shared.setup(host: "guest.gitplelive.io", appId: "gitple")
 
 
 ### 커넥션 이벤트 델리게이트
@@ -62,9 +64,9 @@
 
 - Signleton Access object: ChatClient.user
 
-    ChatClient.user.me { user, errorType in
-        ...
-    }
+        ChatClient.user.me { user, errorType in
+            ...
+        }
 
 
 ### 조회: myInfo (내 정보)
@@ -94,9 +96,9 @@
 
 - Signleton Access object: ChatClient.groupChannel
 
-    ChatClient.groupChannel.getChannelList { page, errorType in
-        ...
-    }
+        ChatClient.groupChannel.getChannelList { page, errorType in
+            ...
+        }
     
     
 ### 전체 목록: 1-1. getChannelList
@@ -207,9 +209,9 @@
     
 - Signleton Access object: ChatClient.groupChannelMessage
 
-    ChatClient.groupChannelMessage.getMessageList { messages, errorType in
-        ...
-    }
+        ChatClient.groupChannelMessage.getMessageList { messages, errorType in
+            ...
+        }
     
 
 ### 그룹 채널 메시지 목록: 1-1. getMessageList
