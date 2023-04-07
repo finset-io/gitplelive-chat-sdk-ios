@@ -3,10 +3,24 @@
 ### GitpleLive iOS SDK 1.0.0
 
 
+## 최소 사양
+
+- 사용 환경: iOS 15 이상
+
+- 개발 환경: Xcode 14.3 이상, Swift 5 이상
+
+
+## 라이브러리 설치 및 사용 방법
+
+- 스위프트 패키지 추가: https://github.com/finset-io/gitplelive-chat-sdk-ios.git
+
 
 ## ChatClient SDK
  
 - Sigleton Ojject: ChatClient.shared
+
+    ChatClient.shared.setup(host: "guest.gitplelive.io", appId: "gitple")
+
 
 ### 커넥션 이벤트 델리게이트
     public var connectionEvent: ConnectionDelegate?
@@ -48,6 +62,11 @@
 
 - Signleton Access object: ChatClient.user
 
+    ChatClient.user.me { user, errorType in
+        ...
+    }
+
+
 ### 조회: myInfo (내 정보)
     public var myInfo: BaseUser?
     
@@ -75,6 +94,11 @@
 
 - Signleton Access object: ChatClient.groupChannel
 
+    ChatClient.groupChannel.getChannelList { page, errorType in
+        ...
+    }
+    
+    
 ### 전체 목록: 1-1. getChannelList
     public func getChannelList(completion: ((ChannelPage?, Int) -> ())? = nil)
 
@@ -183,6 +207,11 @@
     
 - Signleton Access object: ChatClient.groupChannelMessage
 
+    ChatClient.groupChannelMessage.getMessageList { messages, errorType in
+        ...
+    }
+    
+
 ### 그룹 채널 메시지 목록: 1-1. getMessageList
     public func getMessageList(channelId: String, completion: (([BaseMessage]?, Int) -> ())? = nil) 
     
@@ -211,3 +240,72 @@
 ### 그룹 채널 메시지 메타 데이터 삭제: 5. deleteMessageMeta
     public func deleteMessageMeta(channelId: String, messageId: Int64, keys: [String], completion: ((BaseMessage?, Int) -> ())? = nil)
 
+
+
+## 커넥션 이벤트 델리게이트
+
+    public protocol ConnectionDelegate {
+
+        func onError(errorType: Int)
+        
+        func onConnected(status: String)
+        
+        func onReconnected(status: String)
+        
+        func onDisconnected(status: String)
+
+    }
+
+
+
+## 사용자 이벤트 델리게이트
+
+    public protocol UserDelegate {
+
+        func onUpdate(user: BaseUser)
+        
+        func onDelete(user: BaseUser)
+        
+        func onJoined(channel: GroupChannel, user: BaseUser)
+        
+        func onManager(channel: GroupChannel, user: BaseUser)
+        
+    }
+
+
+
+## 그룹 채널 이벤트 델리게이트
+
+    public protocol GroupChannelDelegate {
+
+        func onUpdated(channel: GroupChannel)
+        
+        func onDeleted(channel: GroupChannel)
+        
+        func onJoined(channel: GroupChannel, user: BaseUser)
+        
+        func onLeft(channel: GroupChannel, user: BaseUser)
+        
+        func onManagerCreated(channel: GroupChannel, user: BaseUser)
+        
+        func onManagerDeleted(channel: GroupChannel, user: BaseUser)
+        
+        func onFrozen(channel: GroupChannel)
+        
+        func onUnfrozen(channel: GroupChannel)
+        
+        func onUserBanned(channel: GroupChannel, user: BaseUser, banInfo: BanInfo)
+        
+        func onUserUnbanned(channel: GroupChannel, user: BaseUser)
+        
+        func onMessageCreated(channel: GroupChannel, message: BaseMessage)
+        
+        func onMessageUpdated(channel: GroupChannel, message: BaseMessage)
+        
+        func onMessageDeleted(channel: GroupChannel, message: BaseMessage)
+        
+        func onMessageRead(channel: GroupChannel)
+        
+        func onMessageDelivered(channel: GroupChannel)
+
+    }
