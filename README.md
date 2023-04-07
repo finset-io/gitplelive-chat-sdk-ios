@@ -17,7 +17,7 @@
 
 ## ChatClient SDK
  
-- Sigleton Ojject: ChatClient.shared
+- Sigleton Access Object: ChatClient.shared
 
     ChatClient.shared.setup(host: "guest.gitplelive.io", appId: "gitple")
 
