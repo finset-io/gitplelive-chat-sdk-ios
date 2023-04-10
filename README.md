@@ -15,13 +15,17 @@
 - 스위프트 패키지 추가: https://github.com/finset-io/gitplelive-chat-sdk-ios.git
 
         import GitpleLiveChat
+        
+- 초기화
+        GitpleLiveChat.setup(host: "guest.gitplelive.io", appId: "gitple")
+
 
 
 ## GitpleLiveChat SDK
  
 - Sigleton Access Object: GitpleLiveChat.shared
 
-        GitpleLiveChat.shared.setup(host: "guest.gitplelive.io", appId: "gitple")
+        GitpleLiveChat.shared.connectUser(...) { ... in ... }
 
 
 ### 커넥션 이벤트 델리게이트
