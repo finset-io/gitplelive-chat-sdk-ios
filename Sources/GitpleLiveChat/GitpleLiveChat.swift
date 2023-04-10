@@ -22,7 +22,6 @@ public class GitpleLiveChat: ChatClientSdk {
     
     public static var user: UserApi = UserApi()
     public static var groupChannel = GroupChannelApi()
-    public static var groupChannelMessage = GroupChannelMessageApi()
     
     public static func setup(host: String, appId: String) {
         shared = GitpleLiveChat(host: host, appId: appId)

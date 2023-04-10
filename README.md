@@ -1,6 +1,6 @@
 # gitplelive-chat-sdk-ios
 
-### GitpleLive iOS SDK 1.0.1
+### GitpleLive iOS SDK 1.0.2
 
 
 ## 최소 사양
@@ -92,7 +92,7 @@
 
 
 
-## 그룹 채널  SDK
+## 그룹 채널 SDK
 
 - Signleton Access object: GitpleLiveChat.groupChannel
 
@@ -207,9 +207,9 @@
 
 ## 그룹 채널 메시지 SDK
     
-- Signleton Access object: GitpleLiveChat.groupChannelMessage
+- Signleton Access object: GitpleLiveChat.groupChannel
 
-        GitpleLiveChat.groupChannelMessage.getMessageList { messages, errorType in
+        GitpleLiveChat.groupChannel.getMessageList { messages, errorType in
             ...
         }
     
