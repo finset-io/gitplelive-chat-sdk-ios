@@ -16,7 +16,8 @@
 
         import GitpleLiveChat
         
-- 초기화
+- 초기화:
+
         GitpleLiveChat.setup(host: "guest.gitplelive.io", appId: "gitple")
 
 
