@@ -11,10 +11,10 @@ public class UserApi {
     
     public var delegate: UserDelegate? {
         get {
-            return ChatClient.shared.userEvent
+            return GitpleLiveChat.shared.userEvent
         }
         set(value) {
-            ChatClient.shared.userEvent = value
+            GitpleLiveChat.shared.userEvent = value
         }
     }
     
@@ -34,7 +34,7 @@ public class UserApi {
     // 사용자 조회: 1. me
     //-----------------------------------------------------------------------
     public func me(completion: ((BaseUser?, Int) -> ())? = nil) {
-        if ChatClient.shared.isNotConnected { return }
+        if GitpleLiveChat.shared.isNotConnected { return }
         
         sdk.find() { data, error in
             guard let completion = completion else { return }
@@ -63,7 +63,7 @@ public class UserApi {
     // 사용자 수정: 2. updateUser
     //-----------------------------------------------------------------------
     public func updateUser(name: String, profile: String, completion: ((BaseUser?, Int) -> ())? = nil) {
-        if ChatClient.shared.isNotConnected { return }
+        if GitpleLiveChat.shared.isNotConnected { return }
 
         sdk.update(name: name, profile: profile) { data, error in
             guard let completion = completion else { return }
@@ -92,7 +92,7 @@ public class UserApi {
     // 사용자 메타 데이터 수정: 3. updateMeta
     //-----------------------------------------------------------------------
     public func updateMeta(meta: [String:String], completion: ((BaseUser?, Int) -> ())? = nil) {
-        if ChatClient.shared.isNotConnected { return }
+        if GitpleLiveChat.shared.isNotConnected { return }
 
         sdk.updateMeta(meta: meta) { data, error in
             guard let completion = completion else { return }
@@ -121,7 +121,7 @@ public class UserApi {
     // 사용자 메타 데이터 삭제: 4. deleteMeta
     //-----------------------------------------------------------------------
     public func deleteMeta(keys: [String], completion: ((BaseUser?, Int) -> ())? = nil) {
-        if ChatClient.shared.isNotConnected { return }
+        if GitpleLiveChat.shared.isNotConnected { return }
 
         sdk.deleteMeta(keys: keys) { data, error in
             guard let completion = completion else { return }

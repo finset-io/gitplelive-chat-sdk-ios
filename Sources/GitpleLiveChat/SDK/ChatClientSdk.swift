@@ -306,7 +306,7 @@ public class ChatClientSdk: NSObject {
     }
     
     public func onConnect() {
-        ChatClient.user.me() { user, errorType in
+        GitpleLiveChat.user.me() { user, errorType in
             if errorType > 0 {
                 print(ErrorType.message(errorType: errorType))
             }
@@ -332,7 +332,7 @@ public class ChatClientSdk: NSObject {
     }
 
     public func findAllJoined() {
-        ChatClient.shared.groupChannelSdk.findAllJoined() { data, error in
+        GitpleLiveChat.shared.groupChannelSdk.findAllJoined() { data, error in
             if let data = data {
                 if let page = ChannelPage.from(json: data) {
                     self.subscribe(channels: page.channels)
@@ -357,7 +357,7 @@ public class ChatClientSdk: NSObject {
             // 참가자 권한 채널 이벤트 수신용 토픽
             topics.append(topic + "/all/#")
             
-            if let managers = channel.managers, ChatClient.user.isMemberOf(users: managers) {
+            if let managers = channel.managers, GitpleLiveChat.user.isMemberOf(users: managers) {
                 // 매니저 권한 채널 이벤트 수신용 토픽
                 topics.append(topic + "/manager/#")
             }
@@ -396,21 +396,21 @@ public class ChatClientSdk: NSObject {
             
         case "user_delete":
             userEvent?.onDelete(user: payload.user!)
-            if ChatClient.user.isMe(user: payload.user!) {
+            if GitpleLiveChat.user.isMe(user: payload.user!) {
                 connectionEvent?.onDisconnected(status: "user_delete")
                 disconnectUser()
             }
             break
             
         case "user_joined_channel":
-            if ChatClient.user.isMe(user: payload.user!) {
+            if GitpleLiveChat.user.isMe(user: payload.user!) {
                 subscribe(payload.channel!, "all")
             }
             userEvent?.onJoined(channel: payload.channel!, user: payload.user!)
             break
             
         case "user_become_manager":
-            if ChatClient.user.isMe(user: payload.user!) {
+            if GitpleLiveChat.user.isMe(user: payload.user!) {
                 subscribe(payload.channel!, "all")
                 subscribe(payload.channel!, "manager")
             }
@@ -428,14 +428,14 @@ public class ChatClientSdk: NSObject {
             break
             
         case "group:channel_join":
-            if ChatClient.user.isMe(user: payload.user!) {
+            if GitpleLiveChat.user.isMe(user: payload.user!) {
                 subscribe(payload.channel!, "all")
             }
             groupChannelEvent?.onJoined(channel: payload.channel!, user: payload.user!)
             break
             
         case "group:channel_leave":
-            if ChatClient.user.isMe(user: payload.user!) {
+            if GitpleLiveChat.user.isMe(user: payload.user!) {
                 unsubscribe(payload.channel!, "all")
                 unsubscribe(payload.channel!, "manager")
             }
@@ -443,7 +443,7 @@ public class ChatClientSdk: NSObject {
             break
             
         case "group:channel_manager_create":
-            if ChatClient.user.isMe(user: payload.user!) {
+            if GitpleLiveChat.user.isMe(user: payload.user!) {
                 subscribe(payload.channel!, "all")
                 subscribe(payload.channel!, "manager")
             }
@@ -451,7 +451,7 @@ public class ChatClientSdk: NSObject {
             break
             
         case "group:channel_manager_delete":
-            if ChatClient.user.isMe(user: payload.user!) {
+            if GitpleLiveChat.user.isMe(user: payload.user!) {
                 unsubscribe(payload.channel!, "manager")
             }
             groupChannelEvent?.onManagerDeleted(channel: payload.channel!, user: payload.user!)
@@ -466,7 +466,7 @@ public class ChatClientSdk: NSObject {
             break
             
         case "group:channel_ban":
-            if ChatClient.user.isMe(user: payload.user!) {
+            if GitpleLiveChat.user.isMe(user: payload.user!) {
                 unsubscribe(payload.channel!, "all")
                 unsubscribe(payload.channel!, "manager")
             }

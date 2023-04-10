@@ -15,7 +15,7 @@ public class GroupChannelMessageApi {
     // 그룹 채널 메시지 목록: 1-1. getMessageList
     //-----------------------------------------------------------------------
     public func getMessageList(channelId: String, completion: (([BaseMessage]?, Int) -> ())? = nil) {
-        if ChatClient.shared.isNotConnected { return }
+        if GitpleLiveChat.shared.isNotConnected { return }
 
         sdk.get(channelId: channelId, messageId: 0, mode: nil, type: nil, limit: 0, content: nil) { data, error in
             guard let completion = completion else { return }
@@ -55,7 +55,7 @@ public class GroupChannelMessageApi {
                         content: String? = nil,
                         messageId: Int64,
                         completion: (([BaseMessage]?, Int) -> ())? = nil) {
-        if ChatClient.shared.isNotConnected { return }
+        if GitpleLiveChat.shared.isNotConnected { return }
 
         sdk.get(channelId: channelId, messageId: messageId, mode: mode, type: type, limit: limit, content: content) { data, error in
             guard let completion = completion else { return }
@@ -89,7 +89,7 @@ public class GroupChannelMessageApi {
     // 그룹 채널 메시지 생성: 2-1. sendMessage (텍스트)
     //-----------------------------------------------------------------------
     public func sendMessage(channelId: String, text: String, meta: [String:String]? = nil, completion: ((BaseMessage?, Int) -> ())? = nil) {
-        if ChatClient.shared.isNotConnected { return }
+        if GitpleLiveChat.shared.isNotConnected { return }
 
         sdk.create(channelId: channelId, type: "text", content: text, meta: meta) { data, error in
             guard let completion = completion else { return }
@@ -117,11 +117,11 @@ public class GroupChannelMessageApi {
     // 그룹 채널 메시지 생성: 2-2. sendMessage (파일)
     //-----------------------------------------------------------------------
     public func sendMessage(channelId: String, file: String, meta: [String:String]? = nil, completion: ((BaseMessage?, Int) -> ())? = nil) {
-        if ChatClient.shared.isNotConnected { return }
+        if GitpleLiveChat.shared.isNotConnected { return }
 
         let url = sdk.url_group_channels + channelId + "/messages"
         
-        NetworkHelper.upload(url: url, fileName: file, headers: ChatClient.shared.headers) { data, error in
+        NetworkHelper.upload(url: url, fileName: file, headers: GitpleLiveChat.shared.headers) { data, error in
             if let data = data, let message = BaseMessage.from(json: data), let meta = meta {
                 self.updateMessageMeta(channelId: channelId, messageId: message.message_id, meta: meta, completion: completion)
             }
@@ -150,7 +150,7 @@ public class GroupChannelMessageApi {
     // 그룹 채널 메시지 삭제: 3. deleteMessage
     //-----------------------------------------------------------------------
     public func deleteMessage(channelId: String, messageId: Int64, completion: ((Bool, Int) -> ())? = nil) {
-        if ChatClient.shared.isNotConnected { return }
+        if GitpleLiveChat.shared.isNotConnected { return }
 
         sdk.delete(channelId: channelId, messageId: messageId) { data, error in
             guard let completion = completion else { return }
@@ -174,7 +174,7 @@ public class GroupChannelMessageApi {
     // 그룹 채널 메시지 메타 데이터 수정: 4. updateMessageMeta
     //-----------------------------------------------------------------------
     public func updateMessageMeta(channelId: String, messageId: Int64, meta: [String:String], completion: ((BaseMessage?, Int) -> ())? = nil) {
-        if ChatClient.shared.isNotConnected { return }
+        if GitpleLiveChat.shared.isNotConnected { return }
 
         sdk.updateMeta(channelId: channelId, messageId: messageId, meta: meta) { data, error in
             guard let completion = completion else { return }
@@ -202,7 +202,7 @@ public class GroupChannelMessageApi {
     // 그룹 채널 메시지 메타 데이터 삭제: 5. deleteMessageMeta
     //-----------------------------------------------------------------------
     public func deleteMessageMeta(channelId: String, messageId: Int64, keys: [String], completion: ((BaseMessage?, Int) -> ())? = nil) {
-        if ChatClient.shared.isNotConnected { return }
+        if GitpleLiveChat.shared.isNotConnected { return }
 
         sdk.deleteMeta(channelId: channelId, messageId: messageId, keys: keys) { data, error in
             guard let completion = completion else { return }

@@ -6,6 +6,6 @@ final class GitpleLiveChatTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(GitpleLiveChat().text, "Hello, World!")
+        XCTAssertEqual(GitpleLiveChatTest().text, "Hello, World!")
     }
 }

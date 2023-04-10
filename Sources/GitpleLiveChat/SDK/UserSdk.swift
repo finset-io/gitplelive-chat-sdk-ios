@@ -9,9 +9,9 @@ import Foundation
 
 public class UserSdk {
     
-    var userId: String { return ChatClient.shared.userId }
-    var headers: [String:String] { return ChatClient.shared.headers }
-    var url_users: String { return "https://" + ChatClient.shared.host + "/v1/sdk/users/" }
+    var userId: String { return GitpleLiveChat.shared.userId }
+    var headers: [String:String] { return GitpleLiveChat.shared.headers }
+    var url_users: String { return "https://" + GitpleLiveChat.shared.host + "/v1/sdk/users/" }
         
     func deleteMeta(keys: [String], completion: @escaping (String?, String?) -> Void) {
         let url = url_users + userId + "/meta";

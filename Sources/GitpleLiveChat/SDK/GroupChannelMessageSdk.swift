@@ -9,9 +9,9 @@ import Foundation
 
 public class GroupChannelMessageSdk {
     
-    var userId: String { return ChatClient.shared.userId }
-    var headers: [String:String] { return ChatClient.shared.headers }
-    var url_group_channels: String { return "https://" + ChatClient.shared.host + "/v1/sdk/group/channels/" }
+    var userId: String { return GitpleLiveChat.shared.userId }
+    var headers: [String:String] { return GitpleLiveChat.shared.headers }
+    var url_group_channels: String { return "https://" + GitpleLiveChat.shared.host + "/v1/sdk/group/channels/" }
         
     func create(channelId: String,
                 type: String,

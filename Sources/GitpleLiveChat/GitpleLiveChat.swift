@@ -1,5 +1,5 @@
 //
-//  ChatClient.swift
+//  GitpleLiveChat.swift
 //  GitpleLive SDK Sample App
 //
 //  Created by Lucetesoft Inc. on 2023/02/23.

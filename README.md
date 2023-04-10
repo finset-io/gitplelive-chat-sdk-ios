@@ -1,6 +1,6 @@
 # gitplelive-chat-sdk-ios
 
-### GitpleLive iOS SDK 1.0.0
+### GitpleLive iOS SDK 1.0.1
 
 
 ## 최소 사양
@@ -17,11 +17,11 @@
         import GitpleLiveChat
 
 
-## ChatClient SDK
+## GitpleLiveChat SDK
  
-- Sigleton Access Object: ChatClient.shared
+- Sigleton Access Object: GitpleLiveChat.shared
 
-        ChatClient.shared.setup(host: "guest.gitplelive.io", appId: "gitple")
+        GitpleLiveChat.shared.setup(host: "guest.gitplelive.io", appId: "gitple")
 
 
 ### 커넥션 이벤트 델리게이트
@@ -62,9 +62,9 @@
     
 ## 사용자 SDK
 
-- Signleton Access object: ChatClient.user
+- Signleton Access object: GitpleLiveChat.user
 
-        ChatClient.user.me { user, errorType in
+        GitpleLiveChat.user.me { user, errorType in
             ...
         }
 
@@ -94,9 +94,9 @@
 
 ## 그룹 채널  SDK
 
-- Signleton Access object: ChatClient.groupChannel
+- Signleton Access object: GitpleLiveChat.groupChannel
 
-        ChatClient.groupChannel.getChannelList { page, errorType in
+        GitpleLiveChat.groupChannel.getChannelList { page, errorType in
             ...
         }
     
@@ -207,9 +207,9 @@
 
 ## 그룹 채널 메시지 SDK
     
-- Signleton Access object: ChatClient.groupChannelMessage
+- Signleton Access object: GitpleLiveChat.groupChannelMessage
 
-        ChatClient.groupChannelMessage.getMessageList { messages, errorType in
+        GitpleLiveChat.groupChannelMessage.getMessageList { messages, errorType in
             ...
         }
     
