@@ -82,7 +82,7 @@ public class GroupChannelSdk {
                  showUnread: Bool,
                  showLastMessage: Bool,
                  name: String?,
-                 include_members: String?,
+                 includeMembers: String?,
                  completion: @escaping (String?, String?) -> ()) {
         var url = url_group_channels
 
@@ -94,7 +94,7 @@ public class GroupChannelSdk {
         url += "&show_unread=\(showUnread)"
         url += "&show_last_message=\(showLastMessage)"
         if let name = name { url += "&name=" + name }
-        if let include_members = include_members { url += "&include_members=" + include_members }
+        if let includeMembers = includeMembers { url += "&include_members=" + includeMembers }
         if let next = next { url += "&next=" + next }
 
         NetworkHelper.getRequest(url: url, headers: headers, completion: completion)
@@ -144,7 +144,7 @@ public class GroupChannelSdk {
                        showUnread: Bool,
                        showLastMessage: Bool,
                        name: String?,
-                       include_members: String?,
+                       includeMembers: String?,
                        completion: @escaping (String?, String?) -> ()) {
         var url = url_group_channels + "joined/list"
         
@@ -156,7 +156,7 @@ public class GroupChannelSdk {
         url += "&show_unread=\(showUnread)"
         url += "&show_last_message=\(showLastMessage)"
         if let name = name { url += "&name=" + name }
-        if let include_members = include_members { url += "&include_members=" + include_members }
+        if let includeMembers = includeMembers { url += "&include_members=" + includeMembers }
         if let next = next { url += "&next=" + next }
 
         NetworkHelper.getRequest(url: url, headers: headers, completion: completion)

@@ -59,7 +59,7 @@ public class GroupChannelApi {
                         showUnread: Bool,
                         showLastMessage: Bool,
                         name: String?,
-                        include_members: String?,
+                        includeMembers: String?,
                         next: String?,
                         completion: ((ChannelPage?, Int) -> ())? = nil) {
         if GitpleLiveChat.shared.isNotConnected { return }
@@ -73,7 +73,7 @@ public class GroupChannelApi {
                     showUnread: showUnread,
                     showLastMessage: showLastMessage,
                     name: name,
-                    include_members: include_members) { data, error in
+                    includeMembers: includeMembers) { data, error in
             guard let completion = completion else { return }
                         
             if let data = data, let page = ChannelPage.from(json: data) {
@@ -106,7 +106,7 @@ public class GroupChannelApi {
                               showUnread: Bool = true,
                               showLastMessage: Bool = true,
                               name: String? = nil,
-                              include_members: String? = nil,
+                                     includeMembers: String? = nil,
                               next: String? = nil,
                               completion: ((ChannelPage?, Int) -> ())? = nil) {
         if GitpleLiveChat.shared.isNotConnected { return }
@@ -120,7 +120,7 @@ public class GroupChannelApi {
                            showUnread: showUnread,
                            showLastMessage: showLastMessage,
                            name: name,
-                           include_members: include_members) { data, error in
+                           includeMembers: includeMembers) { data, error in
             guard let completion = completion else { return }
             
             if let data = data, let page = ChannelPage.from(json: data) {

@@ -1,6 +1,6 @@
 # gitplelive-chat-sdk-ios
 
-### GitpleLive iOS SDK 1.0.2
+### GitpleLive iOS SDK 1.0.3
 
 
 ## 최소 사양
@@ -118,7 +118,7 @@
                                 showUnread: Bool,
                                 showLastMessage: Bool,
                                 name: String?,
-                                include_members: String?,
+                                includeMembers: String?,
                                 next: String?,
 
 ### 참가한 목록: 2. getJoinedChannelList
@@ -130,7 +130,7 @@
                                       showUnread: Bool = true,
                                       showLastMessage: Bool = true,
                                       name: String? = nil,
-                                      include_members: String? = nil,
+                                      includeMembers: String? = nil,
                                       next: String? = nil,
                                       completion: ((ChannelPage?, Int) -> ())? = nil)
 
